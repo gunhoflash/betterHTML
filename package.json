@@ -1,0 +1,22 @@
+{
+  "name": "betterhtml",
+  "version": "0.1.0",
+  "description": "For better HTML!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gunhoflash/betterHTML.git"
+  },
+  "keywords": [
+    "HTML"
+  ],
+  "author": "GF",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gunhoflash/betterHTML/issues"
+  },
+  "homepage": "https://github.com/gunhoflash/betterHTML#readme"
+}
