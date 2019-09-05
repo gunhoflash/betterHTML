@@ -48,11 +48,10 @@ getArgs = () => {
 
 // load INPUT_FILE
 loadFile = () => {
-	try {
-		// read the file
+	if (fs.existsSync(INPUT_FILE)) {
+		// file exist
 		FILE = fs.readFileSync(INPUT_FILE, 'utf8');
-	}
-	catch (e) {
+	} else {
 		// file not found
 		FILE = null;
 		log(`No such file:'${INPUT_FILE}'`);
@@ -61,6 +60,16 @@ loadFile = () => {
 	log(FILE);
 };
 
+// TODO: edit it
+remove_comment = () => {
+	/* TODO: edit code:
+		loop
+			find '<!--'
+			find '-->' (or EOF)
+			slice it
+	*/
+		
+};
 /*
 
 run
@@ -77,5 +86,7 @@ getArgs();
 loadFile();
 
 // TODO: remove comment
+remove_comment();
+
 // TODO: structure up & check tag-error
 // TODO: check web standard compliance
