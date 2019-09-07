@@ -19,17 +19,6 @@ let FILE = null;
 
 /*
 
-	common functions
-
-*/
-
-// log
-log = obj => {
-	console.log(obj);
-};
-
-/*
-
 	prework functions
 
 */
@@ -38,7 +27,7 @@ log = obj => {
 getArgs = () => {
 	ARGS = process.argv;
 	if (ARGS.length < 4) {
-		log('Command Format: node betterHTML {input_file} {output_file} {options}');
+		console.log('Command Format: node betterHTML {input_file} {output_file} {options}');
 	} else {
 		INPUT_FILE  = ARGS[2];
 		OUTPUT_FILE = ARGS[3];
@@ -54,10 +43,10 @@ loadFile = () => {
 	} else {
 		// file not found
 		FILE = null;
-		log(`No such file:'${INPUT_FILE}'`);
+		console.log(`No such file:'${INPUT_FILE}'`);
 		return;
 	}
-	log(FILE);
+	console.log(FILE);
 };
 
 // TODO: edit it
@@ -77,7 +66,7 @@ run
 */
 
 // start
-log('[Better HTML]');
+console.log('[Better HTML]');
 
 // get arguments
 getArgs();
