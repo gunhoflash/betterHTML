@@ -46,18 +46,37 @@ loadFile = () => {
 		console.log(`No such file:'${INPUT_FILE}'`);
 		return;
 	}
-	console.log(FILE);
 };
 
-// TODO: edit it
+// delete all comments
 remove_comment = () => {
-	/* TODO: edit code:
-		loop
-			find '<!--'
-			find '-->' (or EOF)
-			slice it
-	*/
+	// handle exceptions
+	if (typeof(FILE) != 'string') return;
+	if (FILE.length == 0) return;
+
+	var i, j;
+
+	// delete comments
+	while (true) {
+
+		// find start of comment
+		i = FILE.indexOf('<!--');
+
+		// break when comment not found
+		if (i == -1)
+			break;
 		
+		// find end of comment
+		j = FILE.indexOf('-->', i + 4);
+
+		if (j == -1) {
+			// remove until EOF
+			FILE =  FILE.slice(0, i);
+		} else {
+			// remove from i to j + 3
+			FILE = FILE.slice(0, i) + FILE.slice(j + 3);
+		}
+	}		
 };
 /*
 
@@ -76,6 +95,8 @@ loadFile();
 
 // TODO: remove comment
 remove_comment();
+
+console.log(FILE);
 
 // TODO: structure up & check tag-error
 // TODO: check web standard compliance
