@@ -1,4 +1,6 @@
-const fs = require('fs');
+const fs        = require('fs');
+const checker   = require('./checker.js');
+const preworker = require('./preworker.js');
 
 /*
 	ARGS
@@ -15,13 +17,9 @@ let INPUT_FILE;
 let OUTPUT_FILE;
 let OPTIONS;
 
-let FILE = null;
-
-/*
-
-	prework functions
-
-*/
+let FILE = {
+	text: ''
+};
 
 // get arguments
 getArgs = () => {
@@ -39,45 +37,14 @@ getArgs = () => {
 loadFile = () => {
 	if (fs.existsSync(INPUT_FILE)) {
 		// file exist
-		FILE = fs.readFileSync(INPUT_FILE, 'utf8');
+		FILE.text = fs.readFileSync(INPUT_FILE, 'utf8');
 	} else {
 		// file not found
-		FILE = null;
 		console.log(`No such file:'${INPUT_FILE}'`);
 		return;
 	}
 };
 
-// delete all comments
-remove_comment = () => {
-	// handle exceptions
-	if (typeof(FILE) != 'string') return;
-	if (FILE.length == 0) return;
-
-	var i, j;
-
-	// delete comments
-	while (true) {
-
-		// find start of comment
-		i = FILE.indexOf('<!--');
-
-		// break when comment not found
-		if (i == -1)
-			break;
-		
-		// find end of comment
-		j = FILE.indexOf('-->', i + 4);
-
-		if (j == -1) {
-			// remove until EOF
-			FILE =  FILE.slice(0, i);
-		} else {
-			// remove from i to j + 3
-			FILE = FILE.slice(0, i) + FILE.slice(j + 3);
-		}
-	}		
-};
 /*
 
 run
@@ -93,10 +60,9 @@ getArgs();
 // load the file
 loadFile();
 
-// TODO: remove comment
-remove_comment();
+// prework and check
+preworker.prework(FILE);
+checker.check(FILE);
 
-console.log(FILE);
-
-// TODO: structure up & check tag-error
-// TODO: check web standard compliance
+// Output the result (for test)
+console.log(FILE.text);
