@@ -1,12 +1,52 @@
-exports.prework = FILE => {
+const fs = require('fs');
+
+// get arguments
+exports.getArgs = () => new Promise((resolve, reject) => {
+	/*
+		ARGS
+			type: object
+			[0]: (node)
+			[1]: (address)
+			[2]: INPUT_FILE
+			[3]: OUTPUT_FILE
+			[4]: OPTIONS
+
+	*/
+	let args = process.argv;
+	if (args.length < 3) {
+		return reject('Command Format: node betterHTML {input_file} [{output_file} {options}]');
+	} else {
+		let FILE = {
+			input_file:  args[2],
+			output_file: args[3] || null,
+			options:     args[4] || null
+		};
+		return resolve(FILE);
+	}
+});
+
+// load file and get text
+exports.readFile = FILE => new Promise((resolve, reject) => {
+	if (fs.existsSync(FILE.input_file)) {
+		// file exist
+		FILE.text = fs.readFileSync(FILE.input_file, 'utf8');
+		return resolve(FILE);
+	} else {
+		// file not found
+		return reject(`No such file:'${FILE.input_file}'`);
+	}
+});
+
+// prework
+exports.prework = FILE => new Promise((resolve, reject) => {
 	console.log('start preworker');
 
 	// TODO: do something
-
 	erase_comment(FILE);
 
 	console.log('end preworker');
-};
+	resolve(FILE);
+});
 
 // erase all comments
 erase_comment = FILE => {

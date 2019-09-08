@@ -1,4 +1,4 @@
-exports.check = FILE => {
+exports.check = FILE => new Promise((resolve, reject) => {
 	console.log('start check');
 	
 	// TODO: do something
@@ -6,4 +6,5 @@ exports.check = FILE => {
 	// TODO: check web standard compliance
 	
 	console.log('end check');
-};
+	resolve(FILE);
+});
