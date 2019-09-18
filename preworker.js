@@ -16,6 +16,16 @@ exports.getArgs = () => new Promise((resolve, reject) => {
 	if (args.length < 3) {
 		return reject('Command Format: node betterHTML {input_file} [{output_file} {options}]');
 	} else {
+		/*
+			FILE
+				type: object
+				input_file
+				output_file
+				options
+				text
+				obj
+
+		*/
 		let FILE = {
 			input_file:  args[2],
 			output_file: args[3] || null,
